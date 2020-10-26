@@ -1,0 +1,15 @@
+.ant-modal-body .ant-page-header-content{
+  padding-top: 0;
+}
+
+.assets-thumbnail{
+  position: relative;
+}
+
+.assets-thumbnail.active{
+  border: 1px solid #3690ff;
+}
+
+.assets-thumbnail .ant-card-cover{
+  height: 150px;
+}

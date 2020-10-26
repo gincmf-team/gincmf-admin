@@ -1,0 +1,72 @@
+.components {
+  margin-bottom: 10px;
+}
+
+.components .label {
+  margin-bottom: 10px;
+}
+
+.components .delete{
+  cursor: pointer;
+}
+
+.components .file-upload{
+  color: #1890ff;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+}
+
+.components .tips {
+  color: #999;
+}
+
+.ant-modal .ant-modal-content .ant-modal-body {
+  max-height: 450px;
+  overflow-y: scroll;
+}
+
+.multipleImage .img-wrap,.multipleFile .img-wrap {
+  position: relative;
+  height: 100px;
+  line-height: 100px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.multipleImage .img-wrap img{
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+}
+
+.multipleImage .handle-btn {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  background: rgba(17, 17, 17, 0.4);
+  width: 100%;
+  border-left: 1px transparent;
+  /* border-right: 1px transparent; */
+  height: 26px;
+  line-height: 26px;
+  align-items: center;
+}
+
+.multipleImage .img-wrap:hover .handle-btn {
+  display: flex;
+}
+
+.multipleImage .handle-btn .v-line {
+  width: 1px;
+  height: 18px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.multipleImage .handle-btn .btn-item {
+  text-align: center;
+  color: #fff;
+}
