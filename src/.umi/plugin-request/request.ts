@@ -20,7 +20,7 @@ import { ApplyPluginsType } from 'umi';
 import { history, plugin } from '../core/umiExports';
             
 import { message, notification } from 'antd';
-import useUmiRequest, { UseRequestProvider } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@ahooksjs_use-request@2.7.0@@ahooksjs/use-request';
+import useUmiRequest, { UseRequestProvider } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@ahooksjs_use-request@2.8.1@@ahooksjs/use-request';
 import {
   BaseOptions,
   BasePaginatedOptions,
@@ -36,7 +36,7 @@ import {
   PaginatedOptionsWithFormat,
   PaginatedParams,
   PaginatedResult,
-} from '/Users/return/workspace/react/gincmf-admin/node_modules/_@ahooksjs_use-request@2.7.0@@ahooksjs/use-request/lib/types';
+} from '/Users/return/workspace/react/gincmf-admin/node_modules/_@ahooksjs_use-request@2.8.1@@ahooksjs/use-request/lib/types';
 
 type ResultWithData<T = any> = { data?: T; [key: string]: any };
 

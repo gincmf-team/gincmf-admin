@@ -27,9 +27,7 @@ class SecurityLayout extends React.Component {
     // 你可以把它替换成你自己的登录认证规则（比如判断 token 是否存在）
 
     const isLogin = currentUser && currentUser.id;
-
-    console.log("isLogin", isLogin);
-
+    
     const queryString = stringify({
       redirect: window.location.href,
     });

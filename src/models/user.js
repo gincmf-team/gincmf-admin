@@ -1,4 +1,5 @@
 import { queryCurrent, query as queryUsers } from "@/services/user";
+
 const UserModel = {
   namespace: "user",
   state: {
@@ -23,8 +24,7 @@ const UserModel = {
   },
   reducers: {
     saveCurrentUser(state, action) {
-      console.log("action", action.payload.code);
-
+    
       let data = {};
       if (action.payload.code === 1) {
         ({ data } = action.payload);

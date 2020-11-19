@@ -14,7 +14,7 @@ import { PageHeaderWrapper } from "@ant-design/pro-layout";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { getUpload, updateUpload } from "@/services/upload";
 
-const Index = () => {
+const Upload = () => {
   const [form] = Form.useForm();
 
   const [spinning, setSpinning] = useState(true);
@@ -279,4 +279,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Upload;

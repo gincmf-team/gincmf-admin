@@ -7,10 +7,7 @@ const proSettings = {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  menu: {
-    locale: false,
-  },
-  title: "码上云",
+  title: "gincmf",
   pwa: false,
   iconfontUrl: "",
 };

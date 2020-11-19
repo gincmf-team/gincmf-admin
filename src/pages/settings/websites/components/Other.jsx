@@ -4,11 +4,11 @@ import { Form, Input, Switch, Button, Row, Col } from "antd";
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 5 },
+    sm: { span: 4 },
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 19 },
+    sm: { span: 20 },
   },
 };
 

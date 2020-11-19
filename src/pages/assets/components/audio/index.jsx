@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { PageHeader, Button, List, Card, Upload, message } from "antd";
 import ModalAudio from "@/pages/utils/modal/assets/components/preview/audio";
 import { DeleteOutlined, CustomerServiceTwoTone } from "@ant-design/icons";
-import { getAssets, deleteAssets } from "@/services/assets";
+import { getAssets ,deleteAssets} from "@/services/assets";
+import {uploadProps} from "../props"
 
-const Video = () => {
+const Audio = () => {
   const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [data, setData] = useState([]);
 
   // 获取资源数据列表
-  const getData = async (params) => {
+  const getData = async (params = []) => {
     const temp = { ...params, type: 1 };
     const result = await getAssets(temp);
     let paginationData = [];
@@ -37,29 +38,13 @@ const Video = () => {
     return { data: paginationData };
   };
 
-  let token = localStorage.getItem("token");
-  if (token) {
-    token = JSON.parse(token);
-  }
-  const uploadProps = {
-    name: "file[]",
-    multiple: true,
-    action: "/api/admin/assets",
-    data: { type: 1 },
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-    onChange(info) {
-      if (info.file.status === "done") {
-        getData([]);
-      }
-    },
-  };
+
+  const upload = uploadProps(1,getData)
 
   // 删除单项
   const deleteItem = async (e, id) => {
     e.stopPropagation();
-    const result = await deleteAsset(id);
+    const result = await deleteAssets(id);
     if (result.code === 1) {
       getData([]);
       message.success(result.msg);
@@ -90,7 +75,7 @@ const Video = () => {
         style={{ padding: 0 }}
         title={`音频（共${total}条）`}
         extra={[
-          <Upload key="upload" {...uploadProps}>
+          <Upload key="upload" {...upload}>
             <Button type="primary">上传</Button>
           </Upload>,
         ]}
@@ -130,4 +115,4 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default Audio;

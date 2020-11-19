@@ -7,28 +7,26 @@ import ProLayout, { DefaultFooter } from "@ant-design/pro-layout";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useIntl, connect, history } from "umi";
 import { Result, Button } from "antd";
-import { getAdminMenu } from "@/services/adminMenu";
 import Authorized from "@/utils/Authorized";
 import RightContent from "@/components/GlobalHeader/RightContent";
 import { getMatchMenu } from "@umijs/route-utils";
+import { getAdminMenu } from "@/services/adminMenu";
 import logo from "../assets/logo.svg";
-import settingsIcon from "../assets/images/settings.png";
 import "@/assets/css/style.css";
 
-const Img = (props) => {
+const Icon = (props) => {
   const { src } = props;
 
   let icon = src;
-  if (icon === "") {
-    icon = settingsIcon;
+  if (icon === '') {
+      icon = 'iconsetting';
   }
   return (
-    <span style={{ verticalAlign: "0px" }} className="anticon">
-      <img style={{ width: "1em", height: "1em" }} alt="pic" src={icon} />
-    </span>
+      <span className="anticon">
+          <i className={`iconfont ${icon}`} />
+      </span>
   );
 };
-
 const noMatch = (
   <Result
     status={403}
@@ -50,15 +48,11 @@ const defaultFooterDom = (
 );
 
 const BasicLayout = (props) => {
-  const [menuData, setMenuData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+ 
   const loopMenuItem = (menus) => {
-    console.log("menus", menus);
-
     return menus.map(({ icon, children, ...item }) => ({
       ...item,
-      icon: <Img src={icon} />,
+      icon: <Icon src={icon} />,
       children: children && loopMenuItem(children),
     }));
   };
@@ -70,7 +64,14 @@ const BasicLayout = (props) => {
     location = {
       pathname: "/",
     },
+    // menuData,
+    // loading,
   } = props;
+
+
+  const [menuData,setMenuData] = useState([])
+  const [loading,setLoading] = useState(true)
+
   const menuDataRef = useRef([]);
 
   useEffect(() => {
@@ -78,21 +79,21 @@ const BasicLayout = (props) => {
       dispatch({
         type: "user/fetchCurrent",
       });
-    }
-    let isUnmounted = false;
 
-    async function featchData() {
-      const result = await getAdminMenu();
-      if (result.code === 1 && !isUnmounted) {
-        setLoading(false);
-        setMenuData(result.data);
+      const fetchData = async () => {
+          const result = await getAdminMenu()
+          if(result.code === 1) {
+            setMenuData(result.data)
+            setLoading(false)
+          }
       }
-    }
-    featchData();
 
-    return () => {
-      isUnmounted = true;
-    };
+      fetchData()
+
+      // dispatch({
+      //   type:"menu/fetchMenu"
+      // })
+    }
   }, []);
   /**
    * init variables
@@ -125,7 +126,6 @@ const BasicLayout = (props) => {
         if (menuItemProps.isUrl || !menuItemProps.path) {
           return defaultDom;
         }
-
         return <Link to={menuItemProps.path}>{defaultDom}</Link>;
       }}
       breadcrumbRender={(routers = []) => [
@@ -146,14 +146,14 @@ const BasicLayout = (props) => {
         );
       }}
       footerRender={() => defaultFooterDom}
-      menu={{
-        loading,
-      }}
+
+      menu={{ locale: false, loading }}
+
       menuDataRender={() => loopMenuItem(menuData)}
       rightContentRender={() => <RightContent />}
-      postMenuData={(menuData) => {
-        menuDataRef.current = menuData || [];
-        return menuData || [];
+      postMenuData={(mData) => {
+        menuDataRef.current = mData || [];
+        return mData || [];
       }}
       {...props}
       {...settings}
@@ -168,4 +168,6 @@ const BasicLayout = (props) => {
 export default connect(({ global, settings }) => ({
   collapsed: global.collapsed,
   settings,
+  // menuData: menu.menuData,
+  // loading:menu.loading
 }))(BasicLayout);

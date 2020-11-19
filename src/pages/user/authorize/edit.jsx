@@ -4,7 +4,7 @@ import { history } from "umi";
 import { PageHeaderWrapper } from "@ant-design/pro-layout";
 import { getAuthorize } from "@/services/authorize";
 import { getData, editData } from "@/services/authAccess";
-import RoleForm from "./components/roleForm";
+import RoleForm from "./components/RoleForm";
 import "@/assets/css/style.css";
 
 const Index = (props) => {
@@ -20,7 +20,7 @@ const Index = (props) => {
     async function featchData() {
       const result = await getAuthorize(roleId);
       if (result.code === 1) {
-        // window.console.log(result)
+        window.console.log(result)
         setTreeData(result.data);
       }
 

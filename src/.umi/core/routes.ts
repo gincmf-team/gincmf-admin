@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-import { ApplyPluginsType, dynamic } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_runtime@3.2.24@@umijs/runtime';
+import { ApplyPluginsType, dynamic } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_runtime@3.2.27@@umijs/runtime';
 import * as umiExports from './umiExports';
 import { plugin } from './plugin';
 import LoadingComponent from '@/components/PageLoading/index';
@@ -85,7 +85,7 @@ export function getRoutes() {
           {
             "name": "personal_settings",
             "path": "/account/settings",
-            "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__user__account__settings__' */'/Users/return/workspace/react/gincmf-admin/src/pages/user/account/settings/'), loading: LoadingComponent}),
+            "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__user__account__settings' */'/Users/return/workspace/react/gincmf-admin/src/pages/user/account/settings'), loading: LoadingComponent}),
             "exact": true
           },
           {
@@ -142,6 +142,36 @@ export function getRoutes() {
               {
                 "name": "userList",
                 "path": "/user_manage/user",
+                "exact": true
+              }
+            ]
+          },
+          {
+            "path": "/portal",
+            "name": "portalManage",
+            "icon": "",
+            "routes": [
+              {
+                "name": "portalList",
+                "path": "/portal/index",
+                "exact": true
+              },
+              {
+                "name": "portalCategory",
+                "path": "/portal/category",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__portal__category' */'/Users/return/workspace/react/gincmf-admin/src/pages/portal/category'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "name": "addPortalCategory",
+                "path": "/portal/category/add",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__portal__category__Add' */'/Users/return/workspace/react/gincmf-admin/src/pages/portal/category/Add'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "name": "editPortalCategory",
+                "path": "/portal/category/edit/:id",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__portal__category__Edit' */'/Users/return/workspace/react/gincmf-admin/src/pages/portal/category/Edit'), loading: LoadingComponent}),
                 "exact": true
               }
             ]

@@ -3,7 +3,7 @@ import { defineConfig } from "umi";
 import defaultSettings from "./defaultSettings";
 import proxy from "./proxy";
 const { REACT_APP_ENV } = process.env;
-const publicPath = "/";
+const publicPath = "/admin/";
 export default defineConfig({
   hash: true,
   antd: {},
@@ -91,7 +91,7 @@ export default defineConfig({
             {
               name: "personal_settings",
               path: "/account/settings",
-              component: "./user/account/settings/",
+              component: "./user/account/settings",
             },
             {
               path: "/user_manage",
@@ -141,6 +141,32 @@ export default defineConfig({
                   path: "/user_manage/user",
                 },
               ],
+            },
+            {
+              path: "/portal",
+              name: "portalManage",
+              icon: "",
+              routes: [
+                {
+                  name: "portalList",
+                  path: "/portal/index",
+                },
+                {
+                  name: "portalCategory",
+                  path: "/portal/category",
+                  component: "./portal/category",
+                },
+                {
+                  name: "addPortalCategory",
+                  path: "/portal/category/add",
+                  component: "./portal/category/Add",
+                },
+                {
+                  name: "editPortalCategory",
+                  path: "/portal/category/edit/:id",
+                  component: "./portal/category/Edit",
+                }
+              ]
             },
             {
               component: "./404",

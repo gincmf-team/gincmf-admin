@@ -25,7 +25,7 @@ const tabList = [
   },
 ];
 
-const Index = () => {
+const Assets = () => {
   const [key, setKey] = useState("tab1");
 
   const onTabChange = (tab) => {
@@ -48,4 +48,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Assets;

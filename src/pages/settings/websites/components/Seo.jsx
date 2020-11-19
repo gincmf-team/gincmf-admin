@@ -44,15 +44,15 @@ const Seo = ({ formData, handleSubmit }) => {
     <Row>
       <Col xs={24} md={12}>
         <Form onFinish={submit} form={form} {...formItemLayout}>
-          <Form.Item label="SEO标题" name="site_seo_title" required>
+          <Form.Item label="SEO标题" name="site_seo_title">
             <Input placeholder="" />
           </Form.Item>
 
-          <Form.Item label="SEO关键字" name="site_seo_description" required>
+          <Form.Item label="SEO关键字" name="site_seo_description">
             <Input placeholder="" />
           </Form.Item>
 
-          <Form.Item label="SEO描述" name="site_seo_keywords" required>
+          <Form.Item label="SEO描述" name="site_seo_keywords">
             <TextArea rows={4} />
           </Form.Item>
 

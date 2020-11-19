@@ -3,7 +3,7 @@ import { useState, useEffect, useContext, useRef } from 'react';
 // @ts-ignore
 import isEqual from '/Users/return/workspace/react/gincmf-admin/node_modules/_fast-deep-equal@3.1.1@fast-deep-equal/index.js';
 // @ts-ignore
-import { UmiContext } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_plugin-model@2.5.5@@umijs/plugin-model/lib/helpers/constant';
+import { UmiContext } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_plugin-model@2.5.6@@umijs/plugin-model/lib/helpers/constant';
 import { Model, models } from './Provider';
 
 export type Models<T extends keyof typeof models> = Model<T>[T]
@@ -63,10 +63,7 @@ export function useModel<T extends keyof Model<T>, U>(
       dispatcher.update(namespace);
     }
     return () => {
-      // 保证组件卸载前，还能最后一次触发 handler
-      setTimeout(() => {
-        dispatcher.callbacks![namespace]!.delete(handler);
-      })
+      dispatcher.callbacks![namespace]!.delete(handler);
     }
   }, [namespace]);
 

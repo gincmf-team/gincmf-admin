@@ -1,0 +1,52 @@
+@import "~antd/es/style/themes/default.less";
+
+.multipleImage {
+  :global {
+    .img-wrap,
+    .multipleFile .img-wrap {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .img-wrap img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .imgWrap {
+    height: 100%;
+    &:hover {
+      .handleBtn{
+        display: flex;
+      }
+    }
+
+    .vLine{
+      width: 1px;
+      height: 18px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .btnItem {
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .handleBtn {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    background: rgba(17, 17, 17, 0.4);
+    width: 100%;
+    border-left: 1px transparent;
+    /* border-right: 1px transparent; */
+    height: 26px;
+    line-height: 26px;
+    align-items: center;
+  }
+}

@@ -4,7 +4,7 @@ import { Button, Tag, Divider } from "antd";
 import { PageHeaderWrapper } from "@ant-design/pro-layout";
 import ProTable from "@ant-design/pro-table";
 
-const Index = () => {
+const Nav = () => {
   const columns = [
     {
       title: "ID",
@@ -65,4 +65,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Nav;

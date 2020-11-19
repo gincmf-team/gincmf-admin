@@ -4,8 +4,9 @@ import { getAssets, deleteAssets } from "@/services/assets";
 import ModalImages from "@/pages/utils/modal/assets/components/preview/images";
 import { DeleteOutlined } from "@ant-design/icons";
 import "@/assets/css/style.css";
+import {uploadProps} from "../props"
 
-const Index = () => {
+const Image = () => {
   const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState(0);
   const [total, setTotal] = useState(0);
@@ -22,8 +23,7 @@ const Index = () => {
     if (result.code === 1) {
       setIndex(0);
       paginationData = result.data.data;
-      setTotal(result.data.total);
-      let tempData = [];
+      let tempData = []
       paginationData.forEach((element) => {
         tempData = [
           ...tempData,
@@ -37,33 +37,17 @@ const Index = () => {
         ];
       });
       setData(tempData);
+      setTotal(result.data.total);
     }
     return { data: paginationData };
   };
 
+  // 首次加载读取数据
   useEffect(() => {
     getData({ current: pageCurrent });
   }, [pageCurrent]);
 
-  let token = localStorage.getItem("token");
-  if (token) {
-    token = JSON.parse(token);
-  }
-  const uploadProps = {
-    name: "file[]",
-    multiple: true,
-    action: "/api/admin/assets",
-    data: { type: 0 },
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-    onChange(info) {
-      window.console.log(info);
-      if (info.file.status === "done") {
-        getData([]);
-      }
-    },
-  };
+  const upload = uploadProps(0,getData)
 
   // 删除单项
   const deleteItem = async (e, id) => {
@@ -76,11 +60,6 @@ const Index = () => {
       message.error(result.msg);
     }
   };
-
-  // 首次加载读取数据
-  useEffect(() => {
-    getData([]);
-  }, []);
 
   const openPreview = (i) => {
     setVisible(true);
@@ -99,7 +78,7 @@ const Index = () => {
         style={{ padding: 0 }}
         title={`图片（共${total}条）`}
         extra={[
-          <Upload key="upload" {...uploadProps}>
+          <Upload key="upload" {...upload}>
             <Button type="primary">上传</Button>
           </Upload>,
         ]}
@@ -143,4 +122,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Image;

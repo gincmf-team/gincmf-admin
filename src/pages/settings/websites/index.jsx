@@ -21,7 +21,7 @@ const tabList = [
   },
 ];
 
-const Index = () => {
+const Websites = () => {
   const [key, setKey] = useState("tab1");
 
   const [spinning, setSpinning] = useState(true);
@@ -92,4 +92,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Websites;

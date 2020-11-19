@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { PageHeader, Button, List, Upload, message } from "antd";
-import { getAssets } from "@/services/assets";
-import Image from "./image";
-import Audio from "./audio";
-import Video from "./video";
-import File from "./file";
-import "@/assets/css/style.css";
-import "./style.css";
+import React, { useState, useEffect, useReducer } from 'react';
+import { PageHeader, Button, List, Upload, message } from 'antd';
+import { getAssets } from '@/services/assets';
+import Image from "./image"
+import Audio from './audio'
+import Video from './video'
+import File from './file'
+import '@/assets/css/style.css';
+import './style.css';
 
 const Index = ({ onOk, visible, type, multiple }) => {
+
+
   const [total, setTotal] = useState(0);
   const [data, setData] = useState([]);
   const [current, setCurrent] = useState([]); // modal选中
@@ -19,62 +21,61 @@ const Index = ({ onOk, visible, type, multiple }) => {
   // modal选中（多选）
   const [dataCurrent, dispath] = useReducer((state, action) => {
     let temp = [...state];
-    const i = action.index;
+    const i = action.index
 
     switch (action.type) {
-      case "add":
-        temp[i] = temp[i] === 1 ? 0 : 1;
-        break;
+      case 'add':
+        temp[i] = temp[i] === 1 ? 0 : 1
+        break
       default:
-        temp = [];
-        break;
+        temp = []
+        break
     }
 
     if (multiple === true) {
-      setCurrent(temp);
+      setCurrent(temp)
     }
 
     return temp;
-  }, []);
+
+  }, [])
 
   useEffect(() => {
     if (multiple === true) {
-      const fileList = [];
+      const fileList = []
       dataCurrent.forEach((v, ti) => {
         if (v) {
-          fileList.push(data[ti]);
+          fileList.push(data[ti])
         }
-      });
+      })
 
       if (onOk) {
-        onOk(fileList);
+        onOk(fileList)
       }
     }
-  }, [current]);
+  }, [current])
+
 
   const [filelist, setFilelist] = useState([]);
 
-  const tempTitle = {
-    image: "图片",
-    audio: "音频",
-    video: "视频",
-    file: "附件",
-  };
-  const tempType = { image: 0, audio: 1, video: 2, file: 3 };
+  const tempTitle = { image: "图片", audio: "音频", video: "视频", file: "附件" }
+  const tempType = { image: 0, audio: 1, video: 2, file: 3 }
 
   useEffect(() => {
     if (!visible) {
-      setPageCurrent(1);
-      setCurrent("");
-      dispath({
-        type: "init",
-      });
+      setPageCurrent(1)
+      setCurrent("")
+      dispath(
+        {
+          type: 'init'
+        }
+      )
     }
-  }, [visible]);
+  }, [visible])
 
   // 获取资源数据列表
   const getData = async (params) => {
-    const temp = { ...params, type: tempType[type] };
+    const temp = { ...params, type: tempType[type] }
     const result = await getAssets(temp);
 
     let slideData = [];
@@ -90,7 +91,7 @@ const Index = ({ onOk, visible, type, multiple }) => {
             file_name: element.file_name,
             file_path: element.file_path,
             prev_path: element.prev_path,
-            remark_name: element.remark_name,
+            remark_name: element.remark_name
           },
         ];
       });
@@ -99,14 +100,14 @@ const Index = ({ onOk, visible, type, multiple }) => {
     return { data: slideData };
   };
 
-  let token = localStorage.getItem("token");
+  let token = localStorage.getItem('token')
   if (token) {
-    token = JSON.parse(token);
+    token = JSON.parse(token)
   }
   const uploadProps = {
-    name: "file[]",
+    name: 'file[]',
     multiple: true,
-    action: "/api/tenant/assets",
+    action: '/api/admin/assets',
     data: { type: tempType[type] },
     headers: {
       Authorization: `Bearer ${token.access_token}`,
@@ -115,9 +116,9 @@ const Index = ({ onOk, visible, type, multiple }) => {
       let temp = [...fileList];
       setFilelist(temp);
 
-      if (file.status === "done") {
+      if (file.status === 'done') {
         if (file.response.code === 1) {
-          getData({ current: pageCurrent });
+          getData({ "current": pageCurrent });
           message.success(file.response.msg);
         } else {
           message.error(file.response.msg);
@@ -130,22 +131,19 @@ const Index = ({ onOk, visible, type, multiple }) => {
 
   // 首次加载读取数据
   useEffect(() => {
-    getData({ current: pageCurrent });
-  }, [type, pageCurrent]);
+    getData({ "current": pageCurrent });
+  }, [type,pageCurrent]);
 
   const openChoose = (file) => {
     if (onOk) {
-      onOk(file);
+      onOk(file)
     }
   };
 
   return (
     <>
-      <PageHeader
-        style={{ padding: 0 }}
-        title={`${tempTitle[type]}（共${total}条）`}
-      >
-        <div style={{ textAlign: "right", marginBottom: "15px" }}>
+      <PageHeader style={{ padding: 0 }} title={`${tempTitle[type]}（共${total}条）`}>
+        <div style={{ textAlign: 'right', marginBottom: '15px' }}>
           <Upload key="upload" {...uploadProps} fileList={filelist}>
             <Button type="primary">上传</Button>
           </Upload>
@@ -159,92 +157,76 @@ const Index = ({ onOk, visible, type, multiple }) => {
             current: pageCurrent,
             total,
             onChange: (page) => {
-              setPageCurrent(page);
-              window.console.log(page);
+              setPageCurrent(page)
+              window.console.log(page)
             },
             pageSize: 10,
           }}
           renderItem={(item, index) => (
             <List.Item>
-              {type === "image" && (
-                <Image
-                  multiple={multiple}
-                  current={current}
-                  index={index}
-                  item={item}
-                  onClick={() => {
-                    if (multiple === true) {
-                      dispath({
-                        type: "add",
+              {type === 'image' && <Image multiple={multiple} current={current} index={index} item={item} onClick={
+                () => {
+                  if (multiple === true) {
+                    dispath(
+                      {
+                        type: 'add',
                         index,
-                      });
-                    } else {
-                      openChoose(item);
-                      setCurrent(index);
-                    }
-                  }}
-                />
-              )}
+                      }
+                    )
+                  } else {
+                    openChoose(item);
+                    setCurrent(index);
+                  }
+                }
+              } />}
 
-              {type === "audio" && (
-                <Audio
-                  multiple={multiple}
-                  current={current}
-                  index={index}
-                  item={item}
-                  onClick={() => {
-                    if (multiple === true) {
-                      dispath({
-                        type: "add",
+              {type === 'audio' && <Audio multiple={multiple} current={current} index={index} item={item} onClick={
+                () => {
+                  if (multiple === true) {
+                    dispath(
+                      {
+                        type: 'add',
                         index,
-                      });
-                    } else {
-                      openChoose(item);
-                      setCurrent(index);
-                    }
-                  }}
-                />
-              )}
+                      }
+                    )
+                  } else {
+                    openChoose(item);
+                    setCurrent(index);
+                  }
+                }
+              } />}
 
-              {type === "video" && (
-                <Video
-                  multiple={multiple}
-                  current={current}
-                  index={index}
-                  item={item}
-                  onClick={() => {
-                    if (multiple === true) {
-                      dispath({
-                        type: "add",
+              {type === 'video' && <Video multiple={multiple} current={current} index={index} item={item} onClick={
+                () => {
+                  if (multiple === true) {
+                    dispath(
+                      {
+                        type: 'add',
                         index,
-                      });
-                    } else {
-                      openChoose(item);
-                      setCurrent(index);
-                    }
-                  }}
-                />
-              )}
+                      }
+                    )
+                  } else {
+                    openChoose(item);
+                    setCurrent(index);
+                  }
+                }
+              } />}
 
-              {type === "file" && (
-                <File
-                  multiple={multiple}
-                  current={current}
-                  index={index}
-                  item={item}
-                  onClick={() => {
-                    if (multiple === true) {
-                      dispath({
-                        type: "add",
+              {type === 'file' && <File multiple={multiple} current={current} index={index} item={item} onClick={
+                () => {
+                  if (multiple === true) {
+                    dispath(
+                      {
+                        type: 'add',
                         index,
-                      });
-                    } else {
-                      openChoose(item);
-                      setCurrent(index);
-                    }
-                  }}
-                />
-              )}
+                      }
+                    )
+                  } else {
+                    openChoose(item);
+                    setCurrent(index);
+                  }
+                }
+              } />}
             </List.Item>
           )}
         />

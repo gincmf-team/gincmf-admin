@@ -1,12 +1,13 @@
-import React from "react";
-import { Card } from "antd";
+import React from 'react';
+import { Card } from 'antd';
 
 const Index = ({ current, multiple, index, item, onClick }) => {
-  let active = "";
+
+  let active = ''
   if (multiple) {
-    active = current[index] === 1 ? "active" : "";
+    active = current[index] === 1 ? 'active' : ''
   } else {
-    active = current === index ? "active" : "";
+    active = current === index ? 'active' : ''
   }
 
   return (
@@ -18,6 +19,7 @@ const Index = ({ current, multiple, index, item, onClick }) => {
     >
       <div className="title">{item.remark_name}</div>
     </Card>
-  );
-};
+
+  )
+}
 export default Index;

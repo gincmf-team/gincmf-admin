@@ -11,7 +11,7 @@ const layout = {
   },
 };
 
-const roleForm = ({ form }) => {
+const RoleForm = ({ form }) => {
   return (
     <Form form={form} style={{ maxWidth: "500px" }} {...layout} name="basic">
       <Form.Item
@@ -29,4 +29,4 @@ const roleForm = ({ form }) => {
   );
 };
 
-export default roleForm;
+export default RoleForm;

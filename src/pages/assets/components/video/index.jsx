@@ -3,6 +3,7 @@ import { PageHeader, Button, List, Card, Upload, message } from "antd";
 import ModalVideo from "@/pages/utils/modal/assets/components/preview/video";
 import { DeleteOutlined, VideoCameraTwoTone } from "@ant-design/icons";
 import { getAssets, deleteAssets } from "@/services/assets";
+import {uploadProps} from "../props"
 
 const Video = () => {
   const [visible, setVisible] = useState(false);
@@ -39,24 +40,7 @@ const Video = () => {
     return { data: paginationData };
   };
 
-  let token = localStorage.getItem("token");
-  if (token) {
-    token = JSON.parse(token);
-  }
-  const uploadProps = {
-    name: "file[]",
-    multiple: true,
-    action: "/api/admin/assets",
-    data: { type: 2 },
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-    onChange(info) {
-      if (info.file.status === "done") {
-        getData([]);
-      }
-    },
-  };
+  const upload = uploadProps(2,getData)
 
   // 删除单项
   const deleteItem = async (e, id) => {
@@ -92,7 +76,7 @@ const Video = () => {
         style={{ padding: 0 }}
         title={`视频（共${total}条）`}
         extra={[
-          <Upload key="upload" {...uploadProps}>
+          <Upload key="upload" {...upload}>
             <Button type="primary">上传</Button>
           </Upload>,
         ]}

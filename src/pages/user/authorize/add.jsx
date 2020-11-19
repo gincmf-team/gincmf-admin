@@ -4,7 +4,7 @@ import { history } from "umi";
 import { PageHeaderWrapper } from "@ant-design/pro-layout";
 import { getAuthorize } from "@/services/authorize";
 import { addData } from "@/services/authAccess";
-import RoleForm from "./components/roleForm";
+import RoleForm from "./components/RoleForm";
 import "@/assets/css/style.css";
 
 const Index = () => {

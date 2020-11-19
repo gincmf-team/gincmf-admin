@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { createBrowserHistory } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_runtime@3.2.24@@umijs/runtime';
+import { createBrowserHistory } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_runtime@3.2.27@@umijs/runtime';
 
 let options = {
-  "basename": "/"
+  "basename": "/admin/"
 };
 if ((<any>window).routerBase) {
   options.basename = (<any>window).routerBase;

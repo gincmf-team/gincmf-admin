@@ -23,7 +23,7 @@
   color: #999;
 }
 
-.ant-modal .ant-modal-content .ant-modal-body {
+.diy_form .ant-modal .ant-modal-content .ant-modal-body {
   max-height: 450px;
   overflow-y: scroll;
 }

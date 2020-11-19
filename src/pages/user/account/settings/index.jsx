@@ -3,7 +3,7 @@ import { Card, Form, message } from "antd";
 import { PageHeaderWrapper } from "@ant-design/pro-layout";
 import { connect } from "umi";
 import { editAccount, getData } from "@/services/user";
-import UserForm from "./components/form";
+import UserForm from "./components/UserForm";
 import "@/assets/css/style.css";
 
 const Index = (props) => {

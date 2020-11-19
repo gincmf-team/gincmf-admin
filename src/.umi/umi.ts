@@ -1,12 +1,11 @@
 // @ts-nocheck
 import './core/polyfill';
-import '@@/core/devScripts';
 import '../global.jsx';
 import { plugin } from './core/plugin';
 import './core/pluginRegister';
 import { createHistory } from './core/history';
-import { ApplyPluginsType } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_runtime@3.2.24@@umijs/runtime';
-import { renderClient } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_renderer-react@3.2.24@@umijs/renderer-react/dist/index.js';
+import { ApplyPluginsType } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_runtime@3.2.27@@umijs/runtime';
+import { renderClient } from '/Users/return/workspace/react/gincmf-admin/node_modules/_@umijs_renderer-react@3.2.27@@umijs/renderer-react/dist/index.js';
 import { getRoutes } from './core/routes';
 
 
@@ -40,7 +39,7 @@ export default clientRender();
 
 
     window.g_umi = {
-      version: '3.2.24',
+      version: '3.2.27',
     };
   
 

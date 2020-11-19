@@ -3,7 +3,9 @@ import { PageHeader, Button, List, Card, Upload, message } from "antd";
 import { DeleteOutlined, FileTwoTone } from "@ant-design/icons";
 import { getAssets, deleteAssets } from "@/services/assets";
 
-const Video = () => {
+import {uploadProps} from "../props"
+
+const File = () => {
   const [total, setTotal] = useState(0);
   const [data, setData] = useState([]);
 
@@ -35,24 +37,7 @@ const Video = () => {
     return { data: paginationData };
   };
 
-  let token = localStorage.getItem("token");
-  if (token) {
-    token = JSON.parse(token);
-  }
-  const uploadProps = {
-    name: "file[]",
-    multiple: true,
-    action: "/api/admin/assets",
-    data: { type: 3 },
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-    onChange(info) {
-      if (info.file.status === "done") {
-        getData([]);
-      }
-    },
-  };
+  const upload = uploadProps(3,getData)
 
   // 删除单项
   const deleteItem = async (e, id) => {
@@ -77,7 +62,7 @@ const Video = () => {
         style={{ padding: 0 }}
         title={`附件（共${total}条）`}
         extra={[
-          <Upload key="upload" {...uploadProps}>
+          <Upload key="upload" {...upload}>
             <Button type="primary">上传</Button>
           </Upload>,
         ]}
@@ -116,4 +101,4 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default File;
