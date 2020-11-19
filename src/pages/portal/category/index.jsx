@@ -1,49 +1,49 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button, Popconfirm, Divider, message, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { history } from "umi"
+import { history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
-import { getPortalCategorys,deletePortalCategory } from '@/services/portalCategory';
+import { getPortalCategorys, deletePortalCategory } from '@/services/portalCategory';
 
-const statusObj = { "enable": 1, "disable": 0 }
-const status = ['停用', '启用']
+const statusObj = { enable: 1, disable: 0 };
+const status = ['停用', '启用'];
 
-const Category = (props) => {
-
-    const ref = useRef()
+const Category = () => {
+    const ref = useRef();
     // 确认删除
     const confirmDelete = async (id) => {
-        const result = await deletePortalCategory(id)
-        console.log("result",result)
+        const result = await deletePortalCategory(id);
         if (result.code === 1) {
-            message.success(result.msg)
-            ref.current.reload()
-            return
+            message.success(result.msg);
+            ref.current.reload();
+            return;
         }
-        message.error(result.msg)
-    }
+        message.error(result.msg);
+    };
     // 批量删除
-    const handleBatch = async (selectedRowKeys) => {
-
-    }
+    const handleBatch = async () => {};
     const columns = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
             width: 100,
-            search: false
+            search: false,
         },
         {
             title: '排序',
-            width:120,
+            width: 120,
             dataIndex: 'list_order',
             key: 'list_order',
             search: false,
             render: (val, _, key) => (
-                <Input style={{display:"inline-block",width:"60px"}} name={`list_order[${key}]`} defaultValue={val} />
-            )
+                <Input
+                    style={{ display: 'inline-block', width: '60px' }}
+                    name={`list_order[${key}]`}
+                    defaultValue={val}
+                />
+            ),
         },
         {
             title: '标题',
@@ -54,45 +54,49 @@ const Category = (props) => {
             title: '描述',
             dataIndex: 'description',
             key: 'description',
-            search: false
+            search: false,
         },
         {
-            title: "状态",
-            dataIndex: "status",
-            key: "status",
-            initialValue: "all",
-            order: "5",
+            title: '状态',
+            dataIndex: 'status',
+            key: 'status',
+            initialValue: 'all',
+            order: '5',
             width: 100,
             valueEnum: {
                 all: {
-                    text: "全部",
-                    status: "Default",
+                    text: '全部',
+                    status: 'Default',
                 },
                 enable: {
-                    text: "启用",
-                    status: "Success",
+                    text: '启用',
+                    status: 'Success',
                 },
                 disable: {
-                    text: "禁用",
-                    status: "Default",
+                    text: '禁用',
+                    status: 'Default',
                 },
             },
         },
         {
-            title: "操作",
+            title: '操作',
             width: 240,
-            dataIndex: "option",
-            valueType: "option",
+            dataIndex: 'option',
+            valueType: 'option',
             render: (_, item) => (
                 <>
                     <a
-                        onClick={ () => { history.push(`/portal/category/add?pid=${item.id}`) }}
+                        onClick={() => {
+                            history.push(`/portal/category/add?pid=${item.id}`);
+                        }}
                     >
                         添加子分类
                     </a>
                     <Divider type="vertical" />
                     <a
-                       onClick={ () => { history.push(`/portal/category/edit/${item.id}`) }}
+                        onClick={() => {
+                            history.push(`/portal/category/edit/${item.id}`);
+                        }}
                     >
                         编辑
                     </a>
@@ -104,41 +108,40 @@ const Category = (props) => {
                         onConfirm={() => confirmDelete(item.id)}
                         placement="topRight"
                     >
-                        <a style={{ color: "#ff4d4f" }}>删除</a>
+                        <a style={{ color: '#ff4d4f' }}>删除</a>
                     </Popconfirm>
 
                     <Divider type="vertical" />
-                   
+
                     <Popconfirm
                         title="您确定隐藏吗?"
                         okText="确认"
                         cancelText="取消"
-                        onConfirm={() => confirmStatus(item.id)}
+                        // onConfirm={() => confirmStatus(item.id)}
                         placement="topRight"
                     >
-                    <a style={{ color: "rgba(0, 0, 0, 0.45)" }}>隐藏</a>
+                        <a style={{ color: 'rgba(0, 0, 0, 0.45)' }}>隐藏</a>
                     </Popconfirm>
                 </>
             ),
         },
-    ]
-
+    ];
 
     const getData = async (params) => {
-        const tempParams = params
-        tempParams.status = statusObj[params.status]
-        const result = await getPortalCategorys(tempParams)
-        let data = []
+        const tempParams = params;
+        tempParams.status = statusObj[params.status];
+        const result = await getPortalCategorys(tempParams);
+        let data = [];
         if (result.code === 1) {
-            data = result.data.data
+            data = result.data.data;
             data.map((v) => {
-                const temp = v
-                temp.status = status[v.status]
-                return temp
-            })
+                const temp = v;
+                temp.status = status[v.status];
+                return temp;
+            });
         }
-        return { data }
-    }
+        return { data };
+    };
     return (
         <PageHeaderWrapper>
             <ProTable
@@ -149,27 +152,32 @@ const Category = (props) => {
                 request={getData}
                 actionRef={ref}
                 toolBarRender={(_, { selectedRowKeys }) => [
-                    <Button key="add" type="primary" onClick={() => { history.push("/portal/category/add") }}>
+                    <Button
+                        key="add"
+                        type="primary"
+                        onClick={() => {
+                            history.push('/portal/category/add');
+                        }}
+                    >
                         <PlusOutlined /> 新建
-                </Button>,
+                    </Button>,
                     selectedRowKeys && selectedRowKeys.length > 0 && (
-                        <Popconfirm key="batchDelete"
+                        <Popconfirm
+                            key="batchDelete"
                             title="您确定全部删除吗?"
                             okText="确认"
                             cancelText="取消"
                             onConfirm={() => {
-                                handleBatch(selectedRowKeys)
+                                handleBatch(selectedRowKeys);
                             }}
                             placement="topRight"
                         >
-                            <Button danger>
-                                批量删除
-                            </Button>
+                            <Button danger>批量删除</Button>
                         </Popconfirm>
                     ),
                 ]}
             />
         </PageHeaderWrapper>
-    )
-}
-export default Category
+    );
+};
+export default Category;

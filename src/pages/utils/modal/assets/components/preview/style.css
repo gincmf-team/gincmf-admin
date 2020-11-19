@@ -1,17 +1,17 @@
-.modal-image .ant-modal-content{
-    background-color:transparent
+.modal-image .ant-modal-content {
+    background-color: transparent;
 }
 
-.modal-image .ant-modal-close{
+.modal-image .ant-modal-close {
     right: -40px;
     top: -30px;
 }
 
-.modal-image .ant-modal-close-x{
+.modal-image .ant-modal-close-x {
     font-size: 40px;
     color: #5e5e5e;
 }
 
-.modal-image .ant-modal-close-x:hover{
+.modal-image .ant-modal-close-x:hover {
     color: #ffffff;
 }
